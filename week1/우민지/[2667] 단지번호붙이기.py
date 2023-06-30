@@ -10,7 +10,7 @@ dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
 for i in range(n):
-    array.append(list(map(int, input().split())))
+    array.append(list(map(int, input())))
 
 def bfs(sx, sy):
 
@@ -24,7 +24,7 @@ def bfs(sx, sy):
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            if 0 <= nx < n and 0 <= ny < n and not visited[nx][ny]:
+            if 0 <= nx < n and 0 <= ny < n and array[nx][ny] == 1 and not visited[nx][ny]:
                 visited[nx][ny] = True
                 count += 1
                 queue.append((nx, ny))
@@ -33,12 +33,11 @@ def bfs(sx, sy):
 
 for i in range(n):
     for j in range(n):
-        if not visited[i][j]:
-            cnt = bfs(i, j)
-            if cnt > 0:
-                answer.append(cnt)
+        if array[i][j] == 1 and not visited[i][j]:
+            answer.append(bfs(i, j))
 
 
 answer.sort()
+print(len(answer))
 for a in answer:
     print(a)
