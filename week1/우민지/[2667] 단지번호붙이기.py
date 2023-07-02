@@ -36,7 +36,6 @@ for i in range(n):
         if array[i][j] == 1 and not visited[i][j]:
             answer.append(bfs(i, j))
 
-
 answer.sort()
 print(len(answer))
 for a in answer:
