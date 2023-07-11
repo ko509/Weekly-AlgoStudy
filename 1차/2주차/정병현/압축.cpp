@@ -6,7 +6,7 @@ using namespace std;
 
 vector<int> solution(string msg) {
     vector<int> answer;
-    map<string, int> mp;
+    map<string, int> mp; // map for string and value of that string
     int n = msg.size(), mps, i = 0;
     string s = " ";
     s[0]+=33;
@@ -15,7 +15,7 @@ vector<int> solution(string msg) {
         s[0]++;
     }
     s = "";
-    mps = 26;
+    mps = 26; // mps means size of mp
     while(i < n){
         s+=msg[i];
         //cout << i << " " << s << "\n";
