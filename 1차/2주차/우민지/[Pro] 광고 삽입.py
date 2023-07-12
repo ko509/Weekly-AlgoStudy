@@ -1,17 +1,22 @@
-def solution(msg):
-    answer = []
-    word_dict = {chr(i): (i - 64) for i in range(65, 91)}
+#https://school.programmers.co.kr/learn/courses/30/lessons/72414
 
-    n = len(msg)
-    w, c = 0, 0  # 현재 입력, 다음 글자
-    while True:
-        c += 1  # 다음 입력
-        if c == n:  # 마지막 인덱스
-            answer.append(word_dict[msg[w:c]])
-            break
-        if msg[w:c + 1] not in word_dict:  # 없는 경우
-            word_dict[msg[w:c + 1]] = len(word_dict) + 1
-            answer.append(word_dict[msg[w:c]])
-            w = c
+def get_time(time):
+    h, m, s = time.split(':')
+    total = int(h) * 3600 + int(m) * 60 + int(s)
+    return total
+
+
+def solution(play_time, adv_time, logs):
+    answer = ''  # min value
+
+    if play_time == adv_time:
+        return '00:00:00'
+
+    start_points = []
+    logs.sort()
+    for log in logs:
+        s, e = log.split("-")
+        start_points.append(s)
+    print(start_points)
 
     return answer
