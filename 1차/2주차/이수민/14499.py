@@ -31,9 +31,7 @@ for m in my:
         Map[new_x][new_y] = dice[0]
     else :
         dice[0] = Map[new_x][new_y]
+        Map[new_x][new_y] = 0
     
     print(dice[5])
-    x,y = new_x, new_y
-    
-
-        
+    x,y = new_x, new_y        
