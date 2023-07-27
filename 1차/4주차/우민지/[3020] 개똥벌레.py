@@ -1,4 +1,3 @@
-# https://www.acmicpc.net/problem/3020
 
 n, h = map(int, input().split()) # 구간의 개수 h 개
 array = []
@@ -8,7 +7,7 @@ min_value = n # 장애물 최솟값
 count = 0
 
 up = []
-down = []
+down = [] # 아래 부분 자라는 것
 
 for i in range(n):
     if i % 2 == 1: # down
@@ -22,26 +21,26 @@ down.sort() # 1 3 5
 
 def binary_search(data, height):
     left = 0
-    right = len(data) # index
-     # height 보다 같거나 작은 중간값을 찾은 후 count 하기
-    while left < right:
+    right = len(data)-1 # index
+    # height 보다 같거나 작은 중간값을 찾은 후 count 하기
+    while left <= right:
         mid = (left + right) // 2
         if data[mid] <= height:
             left = mid + 1
         else:
-            right = mid -1
-    print("data height, right", data, height, right)
-    return len(data) - right
+            right = mid - 1
+
+    return len(data) - (right+1)
 
 for height in range(1, h+1): # 기준점
-    up_cnt = binary_search(up, height)
-    down_cnt = binary_search(down, h - height)
+    up_cnt = binary_search(up,h - height)
+    down_cnt = binary_search(down, height-1)
     temp_cnt = up_cnt + down_cnt
     if temp_cnt < min_value: # 최솟값 갱신
         min_value = temp_cnt
         count = 1
     elif temp_cnt == min_value:
         count += 1
-    print("min_value, count",min_value, count)
+
 
 print(min_value, count)
