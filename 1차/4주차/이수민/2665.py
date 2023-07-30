@@ -1,16 +1,18 @@
+#다익스트라
+#heap을 사용하고, 가중치의 비교를 사용하기 때문에 가중치가 앞에 가는게 중요
+
 import heapq
 
 def find(x,y,total):
-    global M
     heap = []
-    heapq.heappush(heap, (x,y,total))
-    
+    heapq.heappush(heap, (total,x,y))
+    visited[0][0] = 1
     while heap:
         
-        x,y,total = heapq.heappop(heap)    
-    
+        total, x,y = heapq.heappop(heap)    
         if x == N-1 and y == N-1 :
-            M = min(total, M)
+            
+            print(total)
             return
     
         for i in range(4):
@@ -24,12 +26,10 @@ def find(x,y,total):
             
             visited[new_x][new_y] = 1
             
-            
-            
             if S[new_x][new_y] == 0  : #검정색
-                heapq.heappush(heap,(new_x,new_y,total+1))
-            elif S[new_x][new_y] == 1 : #흰색
-                heapq.heappush(heap,(new_x,new_y,total))
+                heapq.heappush(heap,(total+1,new_x,new_y))
+            else : #흰색
+                heapq.heappush(heap,(total,new_x,new_y))
                 
         
 
@@ -40,13 +40,10 @@ N = int(input())
 S = []
 dx = [1, -1, 0, 0]
 dy = [0, 0, -1, 1]
-M = float("inf")
 visited = [[0 for _ in range(N)] for _ in range(N)]
 
 for _ in range(N):
     S.append(list(map(int, list(input()))))
 
-visited[0][0] = 1
+
 find(0,0,0)
-#print(visited)
-print(M)
