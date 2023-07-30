@@ -30,6 +30,7 @@ def solve(sx, sy): # start
                 if array[nx][ny] == 0: # if it's black room
                     new_cnt += 1
                 if new_cnt < distance[nx][ny]:
+                    distance[nx][ny] = new_cnt # nx, ny 까지의 검은방 count 기록
                     heapq.heappush(queue, (new_cnt, nx, ny))
 
 solve(0, 0)
