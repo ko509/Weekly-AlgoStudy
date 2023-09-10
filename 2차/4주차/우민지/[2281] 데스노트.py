@@ -1,7 +1,7 @@
 # https://www.acmicpc.net/problem/2281
 import sys
-sys.setrecursionlimit(10**9)
-
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
 n, m = map(int, input().split())
 names = [] # 7, 4, 2, 3, 2, 5, 1, 12, 7, 5, 6
 # 공간을 넉넉하게
@@ -25,15 +25,16 @@ def dfs(idx, name):
     global deathnote
     if deathnote[idx][name] != -1:
         pass
-
-    if idx == n-1: # 마지막 줄은 제곱 계산 안함
-        deathnote[idx][name] = 0
-    else:
-        # 같은 줄에 쓸 수 있는지 확인하기
-        if name + 1 + names[idx+1] < m:
-            deathnote[idx][name] = min(dfs(idx+1, name+1+names[idx+1]),dfs(idx+1, names[idx+1]-1) + (m - name -1) ** 2)
-        else: #  줄 바꾸기
-            deathnote[idx][name] = dfs(idx+1, names[idx+1]-1) + (m - name -1) ** 2
+    else: # 분기 해주어야 시간초과 안남
+        if idx == n - 1:  # 마지막 줄은 제곱 계산 안함
+            deathnote[idx][name] = 0
+        else:
+            # 같은 줄에 쓸 수 있는지 확인하기
+            if name + 1 + names[idx + 1] < m:
+                deathnote[idx][name] = min(dfs(idx + 1, name + 1 + names[idx + 1]),
+                                           dfs(idx + 1, names[idx + 1] - 1) + (m - name - 1) ** 2)
+            else:  # 줄 바꾸기
+                deathnote[idx][name] = dfs(idx + 1, names[idx + 1] - 1) + (m - name - 1) ** 2
     return deathnote[idx][name]
 
 print(dfs(0, names[0] -1))
