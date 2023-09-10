@@ -42,7 +42,7 @@ def next_customer():
         if min_dist > distance[ax][ay]:
             min_dist = distance[ax][ay]
             next_cus = [ax, ay, bx, by]
-    if min_dist == -1:
+    if min_dist == -1 or min_dist == int(1e9):
         print(-1)
         exit()
     # Fuel Check
@@ -76,10 +76,8 @@ def move(ax, ay, bx, by):
 
 while customer:
     c = next_customer()
-
-    customer.sort()
     dist = move(c[0], c[1], c[2], c[3])
-    if fuel > dist: # 손님 이동시키기 성공 한 경우
+    if fuel >= dist: # 손님 이동시키기 성공 한 경우
         fuel += dist
         sx, sy = c[2], c[3] # 손님의 목적지가 택시의 새로운 출발지점이 된다.
     else:
@@ -87,8 +85,9 @@ while customer:
         print(-1)
         exit()
         break
-    # 삭제하기 ?
+    # 삭제하기
     customer.remove(c)
+    customer.sort()
 
 if flag:
     print(fuel)
