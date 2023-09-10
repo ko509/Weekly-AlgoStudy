@@ -1,7 +1,5 @@
 from collections import deque
-
-# https://www.acmicpc.net/problem/19238
-N, M, fuel = map(int, input().split())
+N, M, fuel = map(int, input().split()) # fuel = 15
 board = []
 flag = True
 
@@ -21,12 +19,12 @@ dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
 # 1. 거리가 가장 가까운 손님 구하기
-def next_customer(sx, sy):
-    global fuel
+def next_customer():
+    global fuel, sx, sy
     distance = [[-1] * N for _ in range(N)] # taxi 좌표에서 모든 칸까지의 거리를 저장
     queue = deque([])
     queue.append((sx, sy))
-#    distance[sx][sy] = 0
+    distance[sx][sy] = 0
     while queue:
         x, y = queue.popleft()
         for i in range(4):
@@ -50,6 +48,7 @@ def next_customer(sx, sy):
         exit(1)
     else:
         fuel -= min_dist
+        sx, sy = next_cus[0], next_cus[1]
 
     return next_cus
 
@@ -57,6 +56,7 @@ def next_customer(sx, sy):
 def move(ax, ay, bx, by):
     # 목적지에서 출발지까지의 거리 구하기
     distance = [[-1] * N for _ in range(N)]
+    distance[ax][ay] = 0
     queue = deque([])
     queue.append((ax, ay))
     while queue:
@@ -70,14 +70,21 @@ def move(ax, ay, bx, by):
 
 
 
-while len(customer):
-    c = next_customer(sx, sy)
+while customer:
+    c = next_customer()
+
+    customer.sort()
+    dist = move(c[0], c[1], c[2], c[3])
+    if fuel > dist: # 손님 이동시키기 성공 한 경우
+        fuel += dist
+        sx, sy = c[2], c[3] # 손님의 목적지가 택시의 새로운 출발지점이 된다.
+    else:
+        flag = False
+        print(-1)
+        exit()
+        break
     # 삭제하기 ?
     customer.remove(c)
-    dist = move(c[0], c[1], c[2], c[3])
-    if fuel > dist:
-        fuel -= dist
-        fuel += dist * 2
 
 if flag:
     print(fuel)
