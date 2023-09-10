@@ -20,7 +20,7 @@ dy = [0, 0, -1, 1]
 
 # 1. 거리가 가장 가까운 손님 구하기
 def next_customer():
-    global fuel, sx, sy
+    global fuel, sx, sy, flag
     distance = [[-1] * N for _ in range(N)] # taxi 좌표에서 모든 칸까지의 거리를 저장
     queue = deque([])
     queue.append((sx, sy))
@@ -33,6 +33,7 @@ def next_customer():
             if 0 <= nx < N and 0 <= ny < N and board[nx][ny] != 1 and distance[nx][ny] == -1:
                 distance[nx][ny] = distance[x][y] + 1
                 queue.append((nx, ny))
+
     min_dist = int(1e9)
     next_cus = [0, 0, 0, 0] # next customer 좌표
     # check customer
@@ -41,11 +42,14 @@ def next_customer():
         if min_dist > distance[ax][ay]:
             min_dist = distance[ax][ay]
             next_cus = [ax, ay, bx, by]
+    if min_dist == -1:
+        print(-1)
+        exit()
     # Fuel Check
     if fuel < min_dist:
         flag = False
         print(-1)
-        exit(1)
+        exit()
     else:
         fuel -= min_dist
         sx, sy = next_cus[0], next_cus[1]
