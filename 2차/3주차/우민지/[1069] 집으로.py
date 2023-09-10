@@ -11,5 +11,7 @@ if distance >= D: # 1칸씩 이동
                  T * (distance // D +1),
                  T * (distance //D) + distance % D)
 else: # 걷기, 점프한다음에 남은거리 걷기, 점프
-    answer = min(distance, T + D-distance , 2*T)
+    answer = min(distance,
+                 T + D-distance ,
+                 2*T)
 print(answer)
