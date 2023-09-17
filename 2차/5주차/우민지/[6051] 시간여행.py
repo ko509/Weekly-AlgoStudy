@@ -1,6 +1,5 @@
 # https://www.acmicpc.net/problem/6051
 import sys
-import copy
 input = sys.stdin.readline
 
 N = int(input())
@@ -36,5 +35,5 @@ for idx in range(N):
             top = stack[-1]
         else:
             top = -1
-    print(log)
+    # print(log)
     print(top)
