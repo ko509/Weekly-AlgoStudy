@@ -30,7 +30,7 @@ def dfs(idx, name):
             deathnote[idx][name] = 0
         else:
             # 같은 줄에 쓸 수 있는지 확인하기
-            if name + 1 + names[idx + 1] < m:
+            if name + 1 + names[idx + 1] < m: # 같은 줄에 쓰기 , 줄 바꾸기 2가지 경우 있음
                 deathnote[idx][name] = min(dfs(idx + 1, name + 1 + names[idx + 1]),
                                            dfs(idx + 1, names[idx + 1] - 1) + (m - name - 1) ** 2)
             else:  # 줄 바꾸기
