@@ -1,8 +1,11 @@
 # https://www.acmicpc.net/problem/6051
+import sys
+import copy
+input = sys.stdin.readline
 
 N = int(input())
 query = []
-log = [[] for _ in range(N+2)]# 모든 기록
+log = [[] for _ in range(N+1)]# 모든 기록
 stack = [] # 가장 최근에 푼 문제 = 스택 맨 위
 
 for idx in range(N):
@@ -16,18 +19,21 @@ for idx in range(N):
         log[idx+1].extend(stack)
         top = stack[-1]
     elif command == 's': # delete
-        if len(stack) > 1:
+        if stack:
             stack.pop()
+        if stack:
             log[idx+1].extend(stack)
             top = stack[-1]
         else:
-            print(-1)
-            continue
+            top = -1
+
     else: # t
         k = int(data[1])
-        tmp = log[k-1]
-        log[idx+1].extend(tmp)
-        stack = tmp
-        top = tmp[-1]
+        stack = copy.deepcopy(log[k-1])
+        log[idx+1].extend(stack)
+        if stack:
+            top = stack[-1]
+        else:
+            top = -1
 
     print(top)
