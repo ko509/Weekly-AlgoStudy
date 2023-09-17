@@ -5,7 +5,7 @@ input = sys.stdin.readline
 
 N = int(input())
 query = []
-log = [[] for _ in range(N+1)]# 모든 기록
+log = [[]] # 모든 기록
 stack = [] # 가장 최근에 푼 문제 = 스택 맨 위
 
 for idx in range(N):
@@ -16,24 +16,25 @@ for idx in range(N):
     if command == 'a': # add
         k = int(data[1])
         stack.append(k)
-        log[idx+1].extend(stack)
+        log.append(stack[:])
         top = stack[-1]
     elif command == 's': # delete
         if stack:
             stack.pop()
         if stack:
-            log[idx+1].extend(stack)
+            log.append(stack[:])
             top = stack[-1]
         else:
             top = -1
+            log.append(stack[:])
 
     else: # t
         k = int(data[1])
-        stack = copy.deepcopy(log[k-1])
-        log[idx+1].extend(stack)
+        stack = log[k-1][:]
+        log.append(stack[:])
         if stack:
             top = stack[-1]
         else:
             top = -1
-
+    print(log)
     print(top)
