@@ -6,7 +6,7 @@ N = int(input())
 # query 순서
 stack = [[-1, 0]] * (N+1) # value , 바로 앞의 query 번호
 
-j = 0
+j = 0 # 현재 가리키는 stack 부분
 for idx in range(1, N+1):
     cmd = list(input().split())
 
@@ -21,4 +21,5 @@ for idx in range(1, N+1):
         else: # time warp
             stack[idx] = [stack[j][0], j]
             j = stack[k][1]
-    print(stack[j][0])
+
+    print(stack[j][0]) # value 출력하기
