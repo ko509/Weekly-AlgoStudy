@@ -26,8 +26,6 @@ def solution(stones, k):
     
     while left <= right:
         mid = (left+right)//2
-        print(left,mid, right)
-        print(find(stones,k, mid))
         if not find(stones, k, mid):
             right = mid -1
         else :
