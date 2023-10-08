@@ -1,7 +1,7 @@
 N = int(input())
 D = []
 answer = []
-log = []
+log = [[0] for _ in range(N)]
 for _ in range(N):
     s = input()
     
@@ -30,5 +30,5 @@ for _ in range(N):
         print(D[-1])
         
 
-    log.append(D.copy())
+    log[i] = D.copy()
     
