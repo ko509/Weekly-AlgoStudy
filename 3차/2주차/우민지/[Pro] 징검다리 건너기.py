@@ -2,7 +2,7 @@
 
 def solution(stones, k):
     answer = 0
-    left, right = 0, 200000000
+    left, right = min(stones), max(stones)
     while left <= right:
         s_list = stones  # copy
         mid = (left + right) // 2
