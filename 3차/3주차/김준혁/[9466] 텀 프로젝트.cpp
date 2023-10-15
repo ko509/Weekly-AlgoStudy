@@ -3,7 +3,7 @@
 #include <queue>
 using namespace std;
 #define MAX 100002
-int board[MAX]; // 1บฮลอ
+int board[MAX]; // 1ยบรร…ร
 int t, n;
 stack <int> s;
 bool vis[MAX];
