@@ -24,7 +24,7 @@ int solve()
 		{
 			t *= 2;
 			if (t >= MAX) break;
-			if (board[t] == -1) q.push(t); // 0ÃÊ ¼ø°£ÀÌµ¿
+			if (board[t] == -1) q.push(t); // 0ì´ˆ ìˆœê°„ì´ë™
 			board[t] = board[cur];
 		}
 
@@ -37,10 +37,10 @@ int solve()
 			{
 				t *= 2;
 				if (t >= MAX) break;
-				if (board[t] == -1) q.push(t); // 0ÃÊ ¼ø°£ÀÌµ¿
+				if (board[t] == -1) q.push(t); // 0ì´ˆ ìˆœê°„ì´ë™
 				board[t] = board[cur];
 			}
-		} // -1Ä­ ÀÌµ¿
+		} // -1ì¹¸ ì´ë™
 		if (cur < MAX && board[cur + 1] == -1)
 		{
 			q.push(cur + 1);
@@ -50,10 +50,10 @@ int solve()
 			{
 				t *= 2;
 				if (t >= MAX) break;
-				if (board[t] == -1) q.push(t); // 0ÃÊ ¼ø°£ÀÌµ¿
+				if (board[t] == -1) q.push(t); // 0ì´ˆ ìˆœê°„ì´ë™
 				board[t] = board[cur];
 			}
-		} // +1Ä­ ÀÌµ¿
+		} // +1ì¹¸ ì´ë™
 
 	}
 	return board[k];
