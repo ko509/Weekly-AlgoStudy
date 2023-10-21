@@ -30,7 +30,6 @@ def solution(numbers):
 
     for n in numbers:
         binary = make_binary(n)
-        print(binary)
         if check_tree(binary):  # True
             answer.append(1)
         else:
