@@ -6,7 +6,7 @@
 '''
 
 M, N = map(int, input().split())
-answer = 0
+
 board = []
 
 for i in range(M):
@@ -15,24 +15,21 @@ for i in range(M):
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-visited = [[False] * N for _ in range(M)]
-visited[0][0] = True
+dp = [[-1] * N for _ in range(M)]
 
 def dfs(x, y):
-    global answer
-
     if x == M-1 and y == N-1: # 재귀 함수 탈출 조건
-        answer += 1
-        return
+        return 1
 
+    if dp[x][y] != -1: # not visited
+        return dp[x][y]
+    dp[x][y] = 0
     for i in range(4): # 상하좌우 탐색
         nx = x + dx[i]
         ny = y + dy[i]
         if 0 <= nx < M and 0 <= ny < N:
-            if board[nx][ny] < board[x][y] and not visited[nx][ny]:
-                visited[nx][ny] = True
-                dfs(nx, ny)
-                visited[nx][ny] = False
+            if board[nx][ny] < board[x][y]:
+                dp[x][y] += dfs(nx, ny)
+    return dp[x][y]
 
-dfs(0, 0)
-print(answer)
+print(dfs(0, 0))
