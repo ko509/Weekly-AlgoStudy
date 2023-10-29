@@ -1,4 +1,6 @@
 # https://www.acmicpc.net/problem/1261
+# 유형 : 0-1 너비 우선 탐색, 여기서 0-1 은 가중치를 의미한다.
+
 from collections import deque
 
 M, N = map(int, input().split())
