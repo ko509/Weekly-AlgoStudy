@@ -1,4 +1,5 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/118668
+
 def solution(alp, cop, problems):
     INF = int(1e9)
     max_alp = 0  # 목표 알고력
@@ -7,6 +8,7 @@ def solution(alp, cop, problems):
         max_alp = max(max_alp, alp_req)  # 최대 필요한 알고력
         max_cop = max(max_cop, cop_req)
 
+    alp, cop = min(max_alp, alp), min(cop, max_cop)
     dp = [[INF] * (max_cop + 1) for _ in range(max_alp + 1)]
     dp[alp][cop] = 0  # 초기 알고력, 코딩력
 
@@ -24,8 +26,8 @@ def solution(alp, cop, problems):
 
             for alp_req, cop_req, alp_rwd, cop_rwd, cost in problems:
                 if alp_req <= i and cop_req <= j:
-                    if i + alp_rwd <= max_alp and j + cop_rwd <= max_cop:
-                        dp[i + alp_rwd][j + cop_rwd] = min(dp[i][j] + cost,
-                                                           dp[i + alp_rwd][j + cop_rwd])
+                    nalp, ncop = min(max_alp, i + alp_rwd), min(max_cop, j + cop_rwd)
+                    dp[nalp][ncop] = min(dp[i][j] + cost,
+                                         dp[nalp][ncop])
 
     return dp[-1][-1]  # 목표 알고력, 코딩력에 도달하기까지 걸리는 시간
