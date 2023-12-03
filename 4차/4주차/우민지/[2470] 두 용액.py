@@ -4,6 +4,7 @@ answer = [0, 0]
 data.sort() # 정렬하기
 value = int(1e9)*2
 left, right = 0, N-1
+
 while left < right:
     temp = data[left] + data[right]
     if abs(value) > abs(temp):
