@@ -11,13 +11,13 @@ class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def isValidBST(root: Optional[TreeNode], minNode: Optional[TreeNode], maxNode: Optional[TreeNode]) -> bool:
 
-            if root == None:  # 재귀 탈출
+            if root == None:  # BST 탐색 재귀 함수 탈출 조건
                 return True
-            if minNode and root.val <= minNode.val:
+            if minNode and root.val <= minNode.val: # BST 의 조건에 맞지 않는 경우 (1)
                 return False
-            if maxNode and root.val >= maxNode.val:
+            if maxNode and root.val >= maxNode.val: # # BST 의 조건에 맞지 않는 경우 (2)
                 return False
-            return isValidBST(root.left, minNode, root) and isValidBST(root.right, root, maxNode)
+            return isValidBST(root.left, minNode, root) and isValidBST(root.right, root, maxNode) # left subtree && right subtree 모두 검증하기
 
         return isValidBST(root, None, None)
 
